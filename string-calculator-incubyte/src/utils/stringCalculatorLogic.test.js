@@ -43,5 +43,8 @@ describe("String Calculator", () => {
     test("handles a custom single-character delimiter", () => {
         expect(add("//;\n1;2;3")).toBe(6);
     });
+    test("throws an error for negative numbers", () => {
+        expect(() => add("-1,2,-3")).toThrow("Please Enter only positive numbers -1, -3");
+    });
     
 })
