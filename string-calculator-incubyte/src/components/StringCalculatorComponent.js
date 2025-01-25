@@ -10,7 +10,7 @@ function StringCalculatorComponent() {
 
   const  handleSum=()=>{
         try {
-            
+        
             const output = add(stringInput);
             setResult(`Result: ${output}`);
         } catch (error) {
