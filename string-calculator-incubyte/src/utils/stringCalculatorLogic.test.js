@@ -1,6 +1,33 @@
 import { add } from "./stringCalculatorLogic";
-
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import StringCalculatorComponent from "../components/StringCalculatorComponent";
+//import "@testing-library/jest-dom/extend-expect";
 describe("String Calculator", () => {
+    test("renders the component correctly", () => {
+      render(<StringCalculatorComponent />);
+      expect(
+        screen.getByRole("heading", {
+          name: /string calculator/i,
+        })
+      ).toBeTruthy();
+      expect(screen.getByRole("textbox")).toBeTruthy();    
+      expect(screen.getByText(/rules for valid input/i)).toBeTruthy();
+      expect(
+        screen.getByRole("button", {
+          name: /calculate/i,
+        })
+      ).toBeTruthy();
+      expect(
+        screen.getByText(/numbers must be separated by or \./i)
+      ).toBeTruthy();
+      expect(
+        screen.getByText(/custom delimiters must start with/i)
+      ).toBeTruthy();
+      expect(
+        screen.getByText(/examples for valid\/invalid inputs:/i)
+      ).toBeTruthy();
+    });
+
     test("returns 0 for an empty string", () => {
         expect(add("")).toBe(0);
     });
@@ -46,5 +73,10 @@ describe("String Calculator", () => {
     test("throws an error for negative numbers", () => {
         expect(() => add("-1,2,-3")).toThrow("Please Enter only positive numbers -1, -3");
     });
+     test("throws an error for invalid input", () => {
+       expect(() => add("1,2,,,,,,,")).toThrow(
+         "Invalid input. Please follow the below rules for a valid input"
+       );
+     });
     
 })

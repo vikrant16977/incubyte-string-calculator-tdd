@@ -20,7 +20,7 @@ function StringCalculatorComponent() {
         }
     }
     const renderRulesCard = () => (
-        <Card style={{ marginLeft:"380px", marginTop: "20px", backgroundColor: "#f9f9f9", padding: "20px" }}>
+        <Card style={{ marginLeft:"left", marginTop: "20px", backgroundColor: "#f9f9f9", padding: "20px" ,width:'100%'}}>
             <Card.Content>
                 <Card.Header style={{ color: "#2185d0", fontSize: "1.5em" }}>Rules for Valid Input</Card.Header>
                 <Card.Description>
@@ -30,7 +30,7 @@ function StringCalculatorComponent() {
                         <li>Negative numbers are not allowed.</li>
                         <li>Numbers greater than 1000 are ignored.</li>
                     </ul>
-                    <strong>Examples:</strong>
+                    <strong>Examples for Valid/Invalid Inputs:</strong>
                     <ul style={{ textAlign: "left", lineHeight: "1.8em", marginTop: "10px" }}>
                         <li><strong>Valid:</strong> 1,2,3</li>
                         <li><strong>Valid:</strong> 1\n2,3</li>
