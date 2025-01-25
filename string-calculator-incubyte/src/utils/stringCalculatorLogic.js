@@ -1,6 +1,6 @@
 export function add(numbers) {
    //Handle Empty string
-   numbers= numbers.replace(/\\n/g, '\n')
+   numbers= numbers.replace(/\\n/g, '\n') // When you input \n, it’s treated as a string literal \\n, not an actual new line character
     if (!numbers) return 0;
     let delimiters = [",", "\n"];
     //Checking for custom delimiters
@@ -20,6 +20,7 @@ export function add(numbers) {
     }
     // Split numbers using the specified delimiters
     let numbersArray = [numbers];
+
     for (const delimiter of delimiters) {
         let tempArray = [];
         for (const str of numbersArray) {
@@ -29,8 +30,14 @@ export function add(numbers) {
         // Update numbersArray to contain the newly split strings for the next iteration
         numbersArray = tempArray;
     }
-
-
+    const checkNegative = numbersArray.filter((num) => num < 0);
+    if (checkNegative.length) {
+        throw new Error(`Please Enter only positive numbers ${checkNegative.join(", ")}`);
+    }
+    numbersArray = numbersArray.map((str) => str.trim()); // Remove whitespace
+    if (numbersArray.some((str) => str === "" || isNaN(Number(str)))) {
+        throw new Error("Invalid input. Please follow the below rules for a valid input");
+    }
    return numbersArray.reduce((sum, num) => (num <= 1000 ? +sum + +num : sum), 0); 
    
 }
