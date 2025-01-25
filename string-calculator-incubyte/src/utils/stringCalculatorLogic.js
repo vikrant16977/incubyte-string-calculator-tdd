@@ -29,7 +29,7 @@ export function add(numbers) {
         numbersArray = tempArray;
     }
 
- 
+
    return numbersArray.reduce((sum, num) => (num <= 1000 ? sum + +num : sum), 0); 
    
 }
