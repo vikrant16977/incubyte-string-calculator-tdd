@@ -1,5 +1,7 @@
 import React,{use, useState} from "react";
 import { add } from "../utils/stringCalculatorLogic";
+import "semantic-ui-css/semantic.min.css";
+import { Button, TextArea, Container, Header, Message } from "semantic-ui-react";
 
 function StringCalculatorComponent() {
 
@@ -8,6 +10,7 @@ function StringCalculatorComponent() {
 
   const  handleSum=()=>{
         try {
+            
             const output = add(stringInput);
             setResult(`Result: ${output}`);
         } catch (error) {
@@ -16,23 +19,32 @@ function StringCalculatorComponent() {
     }
 
     return (
-        <>
-        <h1>String Calculator</h1>
-        <input
+        <Container textAlign="center" style={{ padding: "20px" }}>
+            <Header as="h1">String Calculator</Header>
+            <TextArea
                 placeholder="Enter your string here"
                 value={stringInput}
-                onChange={(e) => setStringInput(e.target.value)}
-               
+                onChange={(e) => {e.preventDefault();
+                    setStringInput(`${e.target.value}`)}}
+                style={{ marginBottom: "10px", padding: "10px", width: "80%" }}
             />
             <br />
-        <button primary onClick={handleSum}>Calculate</button>
-        {result && (
-                <p style={{ marginTop: "20px", fontSize: "18px" }}>
+            <Button
+                primary
+                onClick={handleSum}
+                style={{
+                    marginTop: "10px",
+                }}
+            >
+                Calculate
+            </Button>
+            {result && (
+                <Message style={{ marginTop: "20px", fontSize: "18px" }}>
                     {result}
-                </p>
+                </Message>
             )}
-            </>
-    )
+        </Container>
+    );
 
 }
 

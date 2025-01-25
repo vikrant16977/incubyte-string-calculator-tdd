@@ -19,8 +19,29 @@ describe("String Calculator", () => {
     test("handles newlines as delimiters", () => {
         expect(add("1\n2,3")).toBe(6);
     });
+    test("handles a custom single-character delimiter", () => {
+        expect(add("//;\n1;2;3")).toBe(6);
+    });
+
+    test("handles a custom multi-character delimiter", () => {
+        expect(add("//[***]\n1***2***3")).toBe(6);
+    });
+
+    test("handles multiple custom single-character delimiters", () => {
+        expect(add("//[*][%]\n1*2%3")).toBe(6);
+    });
+
+    test("handles multiple custom multi-character delimiters", () => {
+        expect(add("//[4][%%]\n142%%3")).toBe(6);
+    });
+
+    test("ignores numbers greater than 1000", () => {
+        expect(add("2,1001")).toBe(2);
+        expect(add("2,1000")).toBe(1002);
+    });
 
     test("handles a custom single-character delimiter", () => {
         expect(add("//;\n1;2;3")).toBe(6);
     });
+    
 })
