@@ -1,6 +1,35 @@
 export function add(numbers) {
    //Handle Empty string
     if (!numbers) return 0;
-   let numbersArray= numbers.split(',')
-   return numbersArray.reduce((sum, num) => (num <= 1000 ? sum + +num : sum), 0);
+    let delimiters = [",", "\n"];
+    //Checking for custom delimiters
+    if (numbers.startsWith("//")) {
+        const justDelimiter = numbers.substring(2, numbers.indexOf("\n"));
+        numbers = numbers.substring(numbers.indexOf("\n") + 1); // Remove delimiter line
+
+        if (justDelimiter.startsWith("[") && justDelimiter.endsWith("]")) {
+            // Handle multiple delimiters like //[***][%%]
+            delimiters = justDelimiter
+                .slice(1, -1) // Remove the outer square brackets
+                .split("]["); // Split by "][" to get individual delimiters
+        } else {
+            // Single delimiter
+            delimiters = [justDelimiter];
+        }
+    }
+    // Split numbers using the specified delimiters
+    let numbersArray = [numbers];
+    for (const delimiter of delimiters) {
+        let tempArray = [];
+        for (const str of numbersArray) {
+            // Split the current string using the current delimiter and add results to tempArray
+            tempArray = tempArray.concat(str.split(delimiter)); 
+        }
+        // Update numbersArray to contain the newly split strings for the next iteration
+        numbersArray = tempArray;
+    }
+
+ 
+   return numbersArray.reduce((sum, num) => (num <= 1000 ? sum + +num : sum), 0); 
+   
 }
