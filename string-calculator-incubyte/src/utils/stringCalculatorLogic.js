@@ -1,5 +1,6 @@
 export function add(numbers) {
    //Handle Empty string
+   numbers= numbers.replace(/\\n/g, '\n')
     if (!numbers) return 0;
     let delimiters = [",", "\n"];
     //Checking for custom delimiters
@@ -30,6 +31,6 @@ export function add(numbers) {
     }
 
 
-   return numbersArray.reduce((sum, num) => (num <= 1000 ? sum + +num : sum), 0); 
+   return numbersArray.reduce((sum, num) => (num <= 1000 ? +sum + +num : sum), 0); 
    
 }
