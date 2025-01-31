@@ -1,6 +1,3 @@
-const handlesEmptyString=()=>{
-
-}
 
 export function add(numbers) {
    //Handle Empty string
@@ -40,8 +37,16 @@ export function add(numbers) {
         throw new Error(`Please Enter only positive numbers ${checkNegative.join(", ")}`);
     }
     numbersArray = numbersArray.map((str) => str.trim()); // Remove whitespace
+
+    let inValidData=[]
+
+    inValidData = numbersArray.filter((numbers)=>{
+        return isNaN(Number(numbers));
+    })
+
+    console.log(inValidData);
     if (numbersArray.some((str) => str === "" || isNaN(Number(str)))) {
-        throw new Error("Invalid input. Please follow the below rules for a valid input");
+        throw new Error(`Invalid input. Please follow the below rules for a valid input ${inValidData.join(', ')} `);
     }
    return numbersArray.reduce((sum, num) => (num <= 1000 ? +sum + +num : sum), 0); 
    
