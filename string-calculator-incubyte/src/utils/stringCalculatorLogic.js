@@ -1,7 +1,12 @@
+const handlesEmptyString=()=>{
+
+}
+
 export function add(numbers) {
    //Handle Empty string
-   numbers= numbers.replace(/\\n/g, '\n') // When you input \n, it’s treated as a string literal \\n, not an actual new line character
+  // numbers= numbers.replace(/\\n/g, '\n') // When you input \n, it’s treated as a string literal \\n, not an actual new line character
     if (!numbers) return 0;
+
     let delimiters = [",", "\n"];
     //Checking for custom delimiters
     if (numbers.startsWith("//")) {
