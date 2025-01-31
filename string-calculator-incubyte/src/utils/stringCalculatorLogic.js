@@ -1,7 +1,9 @@
+
 export function add(numbers) {
    //Handle Empty string
-   numbers= numbers.replace(/\\n/g, '\n') // When you input \n, it’s treated as a string literal \\n, not an actual new line character
+  // numbers= numbers.replace(/\\n/g, '\n') // When you input \n, it’s treated as a string literal \\n, not an actual new line character
     if (!numbers) return 0;
+
     let delimiters = [",", "\n"];
     //Checking for custom delimiters
     if (numbers.startsWith("//")) {
@@ -35,8 +37,16 @@ export function add(numbers) {
         throw new Error(`Please Enter only positive numbers ${checkNegative.join(", ")}`);
     }
     numbersArray = numbersArray.map((str) => str.trim()); // Remove whitespace
+
+    let inValidData=[]
+
+    inValidData = numbersArray.filter((numbers)=>{
+        return isNaN(Number(numbers));
+    })
+
+    console.log(inValidData);
     if (numbersArray.some((str) => str === "" || isNaN(Number(str)))) {
-        throw new Error("Invalid input. Please follow the below rules for a valid input");
+        throw new Error(`Invalid input. Please follow the below rules for a valid input ${inValidData.join(', ')} `);
     }
    return numbersArray.reduce((sum, num) => (num <= 1000 ? +sum + +num : sum), 0); 
    

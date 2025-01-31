@@ -78,5 +78,10 @@ describe("String Calculator", () => {
          "Invalid input. Please follow the below rules for a valid input"
        );
      });
+      test("throws an error for invalid input", () => {
+        expect(() => add("1,2,a,b")).toThrow(
+          "Invalid input. Please follow the below rules for a valid input a, b"
+        );
+      });
     
 })
